@@ -40,5 +40,13 @@ function getAllLike() {
     return getArray()
 }
 
+function isLike(id){
 
-export { changeLike, getAllLike }
+    let localLike = getArray()
+
+    return localLike.some(item => item === id)
+
+}
+
+
+export { changeLike, getAllLike, isLike }

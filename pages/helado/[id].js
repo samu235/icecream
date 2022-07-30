@@ -11,14 +11,14 @@ export default function Menu({ idHelado }) {
 
     useEffect(() => {
         getIceCreamByIdService(idHelado).then(data => setIceCream(data))
-    }, [])
+    }, [idHelado])
 
     useEffect(() => {
-        reloadLike()
-    }, [iceCream])
+        reloadLike(idHelado)
+    }, [iceCream,idHelado])
 
-    function reloadLike(){
-        setLike(isLike(idHelado))
+    function reloadLike(id){
+        setLike(isLike(id))
     }
 
     const Heart = () => {
@@ -36,7 +36,7 @@ export default function Menu({ idHelado }) {
 
     function newChangeLike(){
         changeLike(idHelado)
-        reloadLike()
+        reloadLike(idHelado)
     }
     return (
 

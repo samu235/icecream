@@ -50,7 +50,7 @@ export default function Home() {
             <label className="form-check-label" htmlFor="onlyLikes">Only Likes</label>
           </div>
           <div className={styles.filter}>
-            <input type="text" class="form-control" id="filterText" placeholder="add Filter" onChange={changeTextFilter} />
+            <input type="text" className="form-control" id="filterText" placeholder="add Filter" onChange={changeTextFilter} />
           </div>
         </div>
 

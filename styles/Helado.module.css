@@ -5,4 +5,10 @@
 
 .heart {
     color: rgb(255, 1, 221);
+    filter:drop-shadow(1px 1px 5px rgb(39, 39, 39))
+}
+
+.title_box{
+    display: flex;
+    justify-content: space-between;
 }

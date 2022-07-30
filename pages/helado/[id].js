@@ -43,12 +43,13 @@ export default function Menu({ idHelado }) {
         <div>
 
             <div className="container">
-                <div className="col-12">
+                <div className={"col-12 "+styles.title_box}>
                     <h3>{iceCream?.flavor}</h3>
                     <div className={styles.heart} onClick={newChangeLike}>
                         <Heart />
                     </div>
                 </div>
+                
                 <div className="row">
                     <div className="col-12 col-md-4">
                         {iceCream.picture ? <ImgIceScream src={iceCream.picture} styles={styles.img} /> : ""}

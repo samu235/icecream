@@ -43,7 +43,6 @@ function getAllLike() {
 function isLike(id){
 
     let localLike = getArray()
-    console.log("is like",localLike, id,localLike.some(item => item === id))
     return localLike.some(item => item == id)
 
 }

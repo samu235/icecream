@@ -5,7 +5,6 @@ export default function ImgIceScream(props) {
     const idImg = "image" + useId()
 
     function Error() {
-        console.log("error imagen", idImg)
         document.getElementById(idImg).src = imgDefault
     }
 

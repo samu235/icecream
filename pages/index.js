@@ -5,15 +5,27 @@ import getAllIceCreamService from '../servicios/getAllIceCreamService'
 import styles from '../styles/Home.module.css'
 import { isLike } from '../utilities/likeSystem'
 
-export default function Home() {
+export default function Home({ preIceCream }) {
 
   const [iceCreams, setIceCreams] = useState([])
   const [onlyFilter, setFilterLikes] = useState(false)
   const [filterText, setFilterText] = useState("")
 
+
+  //there are two option for get elementen:
+  /*
+  // -this line only if ice cream is change any time 
   useEffect(() => {
+    //there are two option for get elementen:
+
     getAllIceCreamService().then(data => setIceCreams(data))
+
   }, [])
+  */
+  // -this line, if ice cream is always the same
+  useEffect(() => {
+    setIceCreams(preIceCream)
+  }, [preIceCream])
 
   function changeLikeFilter() {
     setFilterLikes($('#onlyLikes').is(":checked"))
@@ -26,7 +38,7 @@ export default function Home() {
   function filter(item) {
     console.log(item)
     if (onlyFilter && !isLike(item.id)) {
-      console.log(item.id,isLike(item.id))
+      console.log(item.id, isLike(item.id))
       return false
     }
     if (filterText.length > 0) {
@@ -70,4 +82,15 @@ export default function Home() {
       </div>
     </div>
   )
+}
+
+
+export async function getStaticProps() {
+  const preIceCream = await getAllIceCreamService()
+
+  return {
+    props: {
+      preIceCream,
+    },
+  }
 }

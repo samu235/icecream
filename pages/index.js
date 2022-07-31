@@ -10,6 +10,7 @@ export default function Home({ preIceCream }) {
   const [iceCreams, setIceCreams] = useState([])
   const [onlyFilter, setFilterLikes] = useState(false)
   const [filterText, setFilterText] = useState("")
+  const [sortOption, setSortOption] = useState("A-Z")
 
 
   //there are two option for get elementen:
@@ -27,6 +28,8 @@ export default function Home({ preIceCream }) {
     setIceCreams(preIceCream)
   }, [preIceCream])
 
+ 
+
   function changeLikeFilter() {
     setFilterLikes($('#onlyLikes').is(":checked"))
   }
@@ -36,9 +39,7 @@ export default function Home({ preIceCream }) {
   }
 
   function filter(item) {
-    console.log(item)
     if (onlyFilter && !isLike(item.id)) {
-      console.log(item.id, isLike(item.id))
       return false
     }
     if (filterText.length > 0) {
@@ -53,6 +54,32 @@ export default function Home({ preIceCream }) {
     return true
   }
 
+  function onClikSort() {
+    if (sortOption === "A-Z") {
+      setSortOption("Z-A")
+    } else if (sortOption === "Z-A") {
+      setSortOption("A-Z")
+    }
+  }
+
+  function sortCompare(item1, item2) {
+    if (sortOption === "A-Z") {
+      if (item1.flavor > item2.flavor) {
+        return 1
+      } else {
+        return -1
+      }
+    } else {
+      if (item1.flavor < item2.flavor) {
+        return 1
+      } else {
+        return -1
+      }
+    }
+  }
+
+
+ 
   return (
     <div>
       <div>
@@ -62,7 +89,10 @@ export default function Home({ preIceCream }) {
             <label className="form-check-label" htmlFor="onlyLikes">Only Likes</label>
           </div>
           <div className={styles.filter}>
-            <input type="text" className="form-control" id="filterText" placeholder="add Filter" onChange={changeTextFilter} />
+            <input type="text" className="form-control" id="filterText" placeholder="Filter name" onChange={changeTextFilter} />
+          </div>
+          <div>
+            <button type="button" className={styles.filter + " btn btn-light"} onClick={onClikSort}>Short:{sortOption}</button>
           </div>
         </div>
 
@@ -70,7 +100,7 @@ export default function Home({ preIceCream }) {
       <div className={styles.container + " container"}>
         <div className='row'>
           {
-            iceCreams?.filter(item => filter(item))?.map(item => {
+            iceCreams?.filter(item => filter(item))?.sort((a, b) => sortCompare(a , b))?.map(item => {
               return (
                 <div key={item?.id} className="col-12 col-md-6 col-lg-4 col-xl-3">
                   <CartIceCream title={item?.flavor} picture={item?.picture} id={item?.id} />
